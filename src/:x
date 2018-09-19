@@ -4,12 +4,13 @@ def linspace(length):
   return [x*(1.0/(length-1)) for x in range(length)]
 
 def get_point_list(point_list, sample_vector, n_dims): 
-  if len(point_list) >= pow(n_dims, n_dims):
+  if len(point_list) >= pow(n_dims, 3):
     return point_list
   else: 
     new_point_list = list() 
     for point in point_list:
       for val in sample_vector:
+        print new_point_list, point, val
         new_point_list += [point + [val]]
     return get_point_list(new_point_list, sample_vector, n_dims)              
 
