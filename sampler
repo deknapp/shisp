@@ -3,11 +3,18 @@
 import sys
 import src.sample
 
+def write_output(output_file, samples):
+  handle = open(output_file, 'w')
+  for sample_point in samples:
+    for number in sample_point:
+      handle.write(str(number))
+      handle.write('  ')
+    handle.write('\n') 
+
 def main(input_file, output_file, n_results):
   samples = src.sample.get_samples(input_file, int(n_results))
-  output_file_handle = open(output_file, 'r')
-  for sample in samples:
-    output_file_handle.write(string(samples))
+  output_file_handle = open(output_file, 'w')
+  write_output(output_file, samples)
 
 main(sys.argv[1], sys.argv[2], sys.argv[3])
 
