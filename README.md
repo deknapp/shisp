@@ -4,10 +4,14 @@ Effectively Sample HIgh dimensional SPaces with complex, nonlinear contraints.
 
 Installation instructions:
 
-To get the code from git, run https://github.com/deknapp/shisp.git . You should not
-need any Python modules that do not come with Python 2.7.10.  If you have any issues obtaining the code, please email me
-at nathaniel.knapp@gmail.com. The code should work out of the box, by running the executable from your home directory. 
-I tested it using Python 2.7.10. 
+To get the code from git, git clone https://github.com/deknapp/shisp.git . You should not
+need any Python modules that do not come with Python 2.7.10. 
+
+To make sure you can run sampler, you need to run python install.py, which changes the permissions of
+sampler to allow it to be executed.   
+
+If you have any issues obtaining or running the code, please email me
+at nathaniel.knapp@gmail.com. 
 
 Description of algorithm:
 
