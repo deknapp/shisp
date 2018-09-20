@@ -12,7 +12,7 @@ def write_output(output_file, samples):
     handle.write('\n') 
 
 def main(input_file, output_file, n_results):
-  samples = src.sample.get_samples(input_file, int(n_results))
+  samples = src.sample.samples(input_file, int(n_results))
   output_file_handle = open(output_file, 'w')
   write_output(output_file, samples)
 
