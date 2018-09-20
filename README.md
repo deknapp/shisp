@@ -41,7 +41,7 @@ Here is a summary of the sampling algorithm steps:
 5. If more than 10 moves have been made in step 2, repeat step 2, with the same direction and starting point P, but
    with an epsilon ten times greater.
 
-6. Repeat step 2 and 3 until the number of valid points have been obtained in step 3 is equal to the number of results
+6. Repeat step 2 and 3 until the number of valid points obtained in step 3 is equal to the number of results
   specified in the input file.
 
 
