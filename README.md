@@ -1,6 +1,6 @@
-shisp
+SHISP
 
-Effectively Sample HIgh dimensional SPaces with complex, nonlinear contraints. 
+Sample HIgh dimensional SPaces with complex, nonlinear contraints 
 
 Installation instructions:
 
