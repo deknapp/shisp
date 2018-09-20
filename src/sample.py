@@ -27,8 +27,8 @@ def find_valid_point(start_point, direction, epsilon, problem_constraints):
   while True: 
     counter += 1
     # This parameter is hardcoded due to time limiations. 
-    # With more time I would try to tune it to for efficiency and accuracy.
-    maximum_iterations = 10 
+    # With more time I would tune it to for efficiency and accuracy.
+    maximum_iterations = 1000 
     if counter > maximum_iterations:
       return find_valid_point(start_point, direction, epsilon*10, problem_constraints)
     point = increment_in_direction(point, direction, epsilon) 
@@ -46,7 +46,7 @@ def evenly_sample_valid_points(problem_constraints, number_of_results):
   valid_point = example
   valid_point_list = [valid_point] 
   # This parameter is hardcoded due to time limiations. 
-  # With more time I would try to tune it to for efficiency and accuracy.
+  # With more time I would tune it to for efficiency and accuracy.
   epsilon = 0.000001 
   while len(valid_point_list) < number_of_results: 
     direction = [random.uniform(-1,1) for x in range(n_dims)]
