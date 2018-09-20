@@ -9,52 +9,47 @@ def valid(point, problem_constraints):
       return False
   return True
 
-def random_direction(n_dims):
-  return [random.uniform(-1,1) for x in range(n_dims)]
-
 def increment_in_direction(point, direction, epsilon):
-  for i in range(len(direction)):
-    point[i] += direction[i]*epsilon 
-  return point
+  return [point[i] + epsilon*direction[i] for i in range(len(point))]
 
 # source: https://mathoverflow.net/questions/9854/uniformly-sampling-from-convex-polytopes
-# I am using the "hit and run" method described in one of the answers.
+# I am using a modification of the "hit and run" method described in one of the answers.
 def find_valid_point(start_point, direction, epsilon, problem_constraints):
-  boundary = start_point
+  
+  if epsilon > 1:
+    return None 
+  point = start_point
   counter = 0 
-  max_iterations = 1000
+  valid_point_list = []
   while True: 
     counter += 1
-    if (counter > max_iterations):
-      return find_valid_point(start_point, direction, epsilon*10, problem_constraints)
-    boundary = increment_in_direction(
-      boundary, 
-      direction,
-      epsilon) 
-    if not problem_constraints.apply(boundary):
+    if counter > pow(10, 6):
+      return find_valid_point(start_point, direction, epsilon*2, problem_constraints)
+    point = increment_in_direction(point, direction, epsilon) 
+    if valid(point, problem_constraints):
+      valid_point_list.append(point)
+    else:
       break 
-  random_step = random.randint(0, counter)
-  valid_point = start_point
-  for i in range(random_step):
-    valid_point = increment_in_direction(
-      valid_point,
-      direction,
-      epsilon)
-  return valid_point 
+  if len(valid_point_list) < 1:
+    return None
+  return random.choice(valid_point_list)
 
 def evenly_sample_valid_points(problem_constraints, number_of_results):
   n_dims = problem_constraints.get_ndim()
-  valid_point = problem_constraints.get_example()
-  valid_point_list = [valid_point] 
-  direction = random_direction(problem_constraints.get_ndim())
-  epsilon = 0.0000001
-  while len(valid_point_list) < number_of_results:
-    valid_point = find_valid_point(valid_point, direction, epsilon, problem_constraints)   
-    valid_point_list.append(valid_point)
+  example = problem_constraints.get_example()
+  print example
+  valid_point_list = [example] 
+  epsilon = 0.00001 
+  while len(valid_point_list) < number_of_results: 
+    direction = [random.uniform(-1,1) for x in range(n_dims)]
+    valid_point = find_valid_point(example, direction, epsilon, problem_constraints)   
+    if valid_point is not None:
+      valid_point_list.append(valid_point)
   return valid_point_list 
  
 def samples(input_file, n_results):
   problem_constraints = constraints.Constraint(input_file) 
   points = evenly_sample_valid_points(problem_constraints, n_results)
+  for point in points:
+    print point
   return points 
-
